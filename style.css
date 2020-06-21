@@ -57,7 +57,7 @@ video {
 
 .profile {
 	position: absolute;
-	top: 50%;
+	top: 20%;
 	left: 6%;
 }
 
@@ -66,4 +66,13 @@ video {
 	background-color: grey;
 	justify-content: center;
 	align-items: center;
+}
+
+iframe {
+	display: none;
+}
+
+img {
+	height: 15rem;
+	width: 15rem;
 }
