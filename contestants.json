@@ -1,0 +1,20 @@
+[
+	{
+		"name": "Billie Eillish",
+		"age": 19,
+		"location": "America",
+		"song": "Yesterday - The Beatles"
+	},
+	{
+		"name": "Lakyn Hepri",
+		"age": 21,
+		"location": "Sydney",
+		"song": "Big Jet Plane - Angus and Julia Stone"
+	},
+	{
+		"name": "Guy Sebastian",
+		"age": 28,
+		"location": "Sydney",
+		"song": "Jealous - Labrinth"
+	}
+]

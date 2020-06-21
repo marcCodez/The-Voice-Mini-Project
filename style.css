@@ -1,0 +1,69 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.turn-button {
+	padding: 3rem;
+	color: white;
+	background-color: red;
+	text-align: center;
+	font-size: 2rem;
+	border-radius: 50%;
+	cursor: pointer;
+	border: 0.3rem solid white;
+	box-shadow: 0 1.5rem black;
+	text-decoration: none;
+	align-self: center;
+}
+
+/* :active an element being activated by a user */
+.turn-button:active {
+	transform: translateY(1rem);
+	box-shadow: 0rem 1rem black;
+	transform: translateY(4px);
+}
+
+.next {
+	background-color: black;
+	color: white;
+	margin-left: 10rem;
+	align-self: center;
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 1.5rem;
+}
+
+.stage {
+	width: 100%;
+	position: relative;
+	/* width: 100%; */
+	overflow: hidden;
+	/* position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%); */
+	z-index: -1;
+}
+
+video {
+	width: 100%;
+	/* position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%); */
+	z-index: -1;
+}
+
+.profile {
+	position: absolute;
+	top: 50%;
+	left: 6%;
+}
+
+.judges-panel {
+	display: flex;
+	background-color: grey;
+	justify-content: center;
+	align-items: center;
+}
