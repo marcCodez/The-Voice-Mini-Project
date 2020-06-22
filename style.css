@@ -76,3 +76,19 @@ img {
 	height: 15rem;
 	width: 15rem;
 }
+
+#name,
+#age,
+#location {
+	display: none;
+}
+
+.positive {
+	margin-left: 7rem;
+	height: 4rem;
+}
+
+.negative {
+	margin-right: 7rem;
+	height: 4rem;
+}
