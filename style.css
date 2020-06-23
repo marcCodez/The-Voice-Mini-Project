@@ -1,6 +1,73 @@
 * {
-	margin: 0;
-	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: voiceFont;
+	src: url(The-Voice-Font.ttf.woff);
+}
+
+.stage {
+	/* width: 100%;
+	height: 100%; */
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	/* width: 100%; */
+	overflow: hidden;
+	/* position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%); */
+	/* z-index: -1; */
+}
+
+.stageContainer {
+	max-width: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin: auto;
+	text-align: center;
+}
+
+.video-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+video {
+	min-width: 100%;
+	min-height: 100%;
+	/* position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%); */
+	/* z-index: -1; */
+}
+
+.headings-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.voice-font1,
+.voice-font2 {
+	font-family: voiceFont;
+	color: black;
+	position: absolute;
+	top: 50;
+}
+
+.voice-font1 {
+}
+.voice-font2 {
 }
 
 .turn-button {
@@ -15,6 +82,7 @@
 	box-shadow: 0 1.5rem black;
 	text-decoration: none;
 	align-self: center;
+	display: none;
 }
 
 /* :active an element being activated by a user */
@@ -34,31 +102,12 @@
 	padding: 1.5rem;
 }
 
-.stage {
-	width: 100%;
-	position: relative;
-	/* width: 100%; */
-	overflow: hidden;
-	/* position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%); */
-	z-index: -1;
-}
-
-video {
-	width: 100%;
-	/* position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%); */
-	z-index: -1;
-}
-
 .profile {
 	position: absolute;
-	top: 20%;
-	left: 6%;
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+	top: 5rem;
 }
 
 .judges-panel {
@@ -84,11 +133,17 @@ img {
 }
 
 .positive {
+	display: none;
 	margin-left: 7rem;
 	height: 4rem;
 }
 
 .negative {
+	display: none;
 	margin-right: 7rem;
 	height: 4rem;
+}
+
+.start {
+	position: relative;
 }

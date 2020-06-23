@@ -17,10 +17,19 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<div class="stage">
-			<video id="videoBG" poster="media/poster.png" autoplay muted loop>
-				<source src="media/vid-background.mp4" type="video/mp4" />
-			</video>
+		<div class="stage stageContainer">
+			<div id="video-container">
+				<video id="videoBG" poster="media/poster.png" autoplay muted loop>
+					<source src="media/vid-background.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<!-- <div class="headings-div"> -->
+			<h1 class="mb-3 voice-font1">
+				&#127908; Select an option below &#127908;
+			</h1>
+
+			<!-- </div> -->
+
 			<div class="container profile">
 				<div class="row">
 					<div class="col-md-6 mx-auto text-center">
@@ -34,12 +43,17 @@
 		</div>
 
 		<div class="judges-panel">
-			<button class="btn btn-danger negative">Negative React</button>
+			<button class="btn btn-danger negative" style="display: none;">
+				Negative React
+			</button>
 			<audio id="player"></audio>
 			<button class="turn-button">TURN</button>
 			<audio id="audio" src="media/button-sound.mp3"></audio>
-			<button class="next">Next Contestant</button>
-			<button class="btn btn-success positive">Positive React</button>
+			<button class="next">Start Blind Auditions</button>
+			<button class="register">Register Contestant</button>
+			<button class="btn btn-success positive" style="display: none;">
+				Positive React
+			</button>
 			<audio id="player2"></audio>
 		</div>
 

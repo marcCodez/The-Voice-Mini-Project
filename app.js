@@ -27,6 +27,7 @@ const data = [
 ];
 
 
+
 document.querySelector('.turn-button').addEventListener('click', buttonSound);
 
 // Create event for next button
@@ -36,15 +37,12 @@ document.querySelector('.negative').addEventListener('click', negativeReact);
 
 document.querySelector('.positive').addEventListener('click', positiveReact);
 
+// document.querySelector('.start').addEventListener('click', ;
 
 // pass the data in the profileIterator function
 const contestants = profileIterator(data);
 
 // Call first profile
-// nextContestant();
-nextContestant();
-
-
 
 
 
@@ -80,14 +78,20 @@ function nextContestant() {
     }
 
   
-
+    document.querySelector('.next').innerHTML = 'Next Contestant';
+    document.querySelector(".turn-button").style.display = 'inline';
+    document.querySelector(".positive").style.display = 'inline';
+    document.querySelector(".negative").style.display = 'inline';
+    document.querySelector(".voice-font2").style.display = 'none';
+    document.querySelector(".voice-font1").style.display = 'none';
    
-    
     
 
     // document.querySelector('#imageDisplay').innerHTML = `<img
     // src="${currentContestant.image}">`;
 }
+
+
 
 // Profile Iterator
 function profileIterator(contestants) {
