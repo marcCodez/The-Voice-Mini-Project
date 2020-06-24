@@ -37,11 +37,6 @@ class Contestant {
     }
 }
 
-class UI {
-    addContestantToStage(contestant){
-
-    }
-}
 
 class Store {
     // Fetch from local storage
@@ -113,7 +108,7 @@ document.querySelector('.positive').addEventListener('click', positiveReact);
 
 
 // pass the data in the profileIterator function
-const contestants = profileIterator(contestantDataArray);
+let contestants = profileIterator(contestantDataArray);
 
 // Call first profile
 
@@ -149,15 +144,46 @@ function nextContestant() {
     document.querySelector(".negative").style.display = 'inline';
     document.querySelector(".voice-font1").style.display = 'none';
   
-    } else {
-        // No more contestants
-        window.location.reload();
-    }
+    } else  {
 
-  
-  
-   
-    
+        // // set time out prob
+        // window.location.reload();
+
+        // No contestants popup
+        document.querySelector('#popupModal').innerHTML =   `
+       
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">No contestants!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Please register your contestants</p>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      `;
+
+      document.querySelector('.popupButton').click();
+
+      setTimeout(function(){
+        window.location.reload();
+    }, 3500);
+        // Erase Contestant list
+       
+      
+        // No more contestants
+      
+
+       
+        
+
+    }
 
     // document.querySelector('#imageDisplay').innerHTML = `<img
     // src="${currentContestant.image}">`;
@@ -169,18 +195,33 @@ function nextContestant() {
 function profileIterator(contestants) {
     // counter
 let nextIndex = 0;
+// let finalIndex = contestants.length-1;
+
 
 // return object with next function
 return {
     next: function(){
+        
+
         return nextIndex < contestants.length ?
         {value: contestants[nextIndex++], done: false} :
         {done: true}
-    } 
+      
+
+    //     next: function(){
+    //         if (contestants === contestants[contestants.length-1]){
+    //             return nextIndex < contestants.length ?
+    //             {value: contestants[0++], done: false} :
+    //             {done: true}
+    //         } else {
+    //         return nextIndex < contestants.length ?
+    //         {value: contestants[nextIndex++], done: false} :
+    //         {done: true}
+    //         }
+     } 
 };
 
 }
-
 
 
 function buttonSound(){

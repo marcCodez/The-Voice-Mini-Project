@@ -153,3 +153,7 @@ img {
 .register {
 	margin-left: 4rem;
 }
+
+.close {
+	display: none;
+}
