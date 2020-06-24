@@ -56,8 +56,8 @@ function nextContestant() {
     // Add a condition if it finishes looping through the array
     if(currentContestant !== undefined){
     document.querySelector('#profileDisplay').innerHTML = `
-    <iframe class="hidden-vid" width="560" height="315" src="${currentContestant.link}&rel=0&autoplay=1&mute=2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <div id="imageDisplay"><img class="anon"
+    <iframe class="mb-3 hidden-vid" width="539" height="315" src="${currentContestant.link}&rel=0&autoplay=1&mute=2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="imageDisplay"><img class="anon mb-3"
                             src="media/anon.png"></div>
     <ul class="list-group">
         <li class="list-group-item" id="name">Name: ${currentContestant.name}
@@ -82,7 +82,6 @@ function nextContestant() {
     document.querySelector(".turn-button").style.display = 'inline';
     document.querySelector(".positive").style.display = 'inline';
     document.querySelector(".negative").style.display = 'inline';
-    document.querySelector(".voice-font2").style.display = 'none';
     document.querySelector(".voice-font1").style.display = 'none';
    
     
