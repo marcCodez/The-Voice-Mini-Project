@@ -70,7 +70,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form class="w-form">
+							<form class="w-form regoForm">
 								<div class="form-group">
 									<label for="name">Name</label>
 									<input type="text" id="contName" class="form-control" />
@@ -90,12 +90,11 @@
 								</div>
 								<div class="form-group">
 									<label for="link"
-										>Link (Valid Embedded Youtube Link with start time e.g.
-										https://www.youtube.com/embed/fZB-ptAnoQc?start=26)</label
+										>Link (Valid Embedded Youtube Link with start time)</label
 									>
-									<input type="text" id="link" class="form-control" />
+									<input type="text" id="link" class="form-control" placeholder="https://www.youtube.com/embed/fZB-ptAnoQc?start=26"/>
 								</div>
-							</form>
+							
 						</div>
 						<div class="modal-footer">
 							<button
@@ -105,10 +104,9 @@
 							>
 								Close
 							</button>
-							<button id="w-change-btn" type="button" class="btn btn-danger">
-								Save changes
-							</button>
-						</div>
+							<input id="w-change-btn" type="submit" value="Register" class="btn btn-danger">
+                        </div>
+                    </form>
 					</div>
 				</div>
 			</div>

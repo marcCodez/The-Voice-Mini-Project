@@ -1,30 +1,102 @@
 // Temporary hardcoded data
-const data = [
-	{
-		name: 'Dua Lipa',
-		age: 22,
-		location: 'UK',
-        song: 'Arctic Monkeys - Do I Wanna Know?',
-        link:'https://www.youtube.com/embed/fZB-ptAnoQc?start=26'
-	},
-	{
-		name: 'James Arthur',
-		age: 24,
-		location: 'UK',
-        song: 'Frankie Vallie - Cant Take my Eyes Off you',
-        link:'https://www.youtube.com/embed/JUeEcdS-aa0?start=12'
+// const data = [
+// 	{
+// 		name: 'Dua Lipa',
+// 		age: 22,
+// 		location: 'UK',
+//         song: 'Arctic Monkeys - Do I Wanna Know?',
+//         link:'https://www.youtube.com/embed/fZB-ptAnoQc?start=26'
+// 	},
+// 	{
+// 		name: 'James Arthur',
+// 		age: 24,
+// 		location: 'UK',
+//         song: 'Frankie Vallie - Cant Take my Eyes Off you',
+//         link:'https://www.youtube.com/embed/JUeEcdS-aa0?start=12'
        
-    },
-    {
-		name: 'Francisco Martin',
-		age: 22,
-		location: 'America',
-        song: 'Harry Styles - Falling',
-        link:'https://www.youtube.com/embed/b4IDCCJDCTg?start=2'
+//     },
+//     {
+// 		name: 'Francisco Martin',
+// 		age: 22,
+// 		location: 'America',
+//         song: 'Harry Styles - Falling',
+//         link:'https://www.youtube.com/embed/b4IDCCJDCTg?start=2'
        
-	},
+// 	},
 	
-];
+// ];
+
+class Contestant {
+    constructor(name, age, location, song, link){
+        this.name = name;
+        this.age = age;
+        this.location = location;
+        this.song = song;
+        this.link = link;
+
+    }
+}
+
+class UI {
+    addContestantToStage(contestant){
+
+    }
+}
+
+class Store {
+    // Fetch from local storage
+    static getContestants() {
+        let contestants;
+        if(localStorage.getItem('contestants') === null){
+            contestants = [];
+        } else {
+            // convert to JS object to push item
+            contestants = JSON.parse(localStorage.getItem('contestants'))
+        }
+        return contestants;
+    }
+
+    // Add to local storage
+    static addContestant(contestant) {
+        const contestants = Store.getContestants();
+
+        // push it in the converted JS object
+        contestants.push(contestant);
+        // set local storage back to string with the new contestant
+        localStorage.setItem('contestants', JSON.stringify(contestants));
+    }
+}
+
+const contestantDataArray =[];
+
+
+
+document.querySelector(".regoForm").addEventListener('submit', 
+function(e){
+    // Get values from contestant rego form
+const name = document.querySelector("#contName").value,
+ age = document.querySelector("#contAge").value,
+ location = document.querySelector("#contLocation").value,
+ song = document.querySelector("#song").value,
+ link = document.querySelector("#link").value;
+
+// Instantiate Contestant - create an instance
+const contestant = new Contestant(name, age, location, song, link);
+
+
+Store.addContestant(contestant);
+
+contestantDataArray.push(contestant);
+
+ //close modal - need to use jQuery
+ $('#contestantModal').modal('hide');
+
+
+    e.preventDefault();
+    
+});
+
+
 
 
 
@@ -39,8 +111,9 @@ document.querySelector('.positive').addEventListener('click', positiveReact);
 
 // document.querySelector('.start').addEventListener('click', ;
 
+
 // pass the data in the profileIterator function
-const contestants = profileIterator(data);
+const contestants = profileIterator(contestantDataArray);
 
 // Call first profile
 
@@ -70,7 +143,11 @@ function nextContestant() {
         </li>
     </ul>
     `;
-   
+    document.querySelector('.next').innerHTML = 'Next Contestant';
+    document.querySelector(".turn-button").style.display = 'inline';
+    document.querySelector(".positive").style.display = 'inline';
+    document.querySelector(".negative").style.display = 'inline';
+    document.querySelector(".voice-font1").style.display = 'none';
   
     } else {
         // No more contestants
@@ -78,11 +155,7 @@ function nextContestant() {
     }
 
   
-    document.querySelector('.next').innerHTML = 'Next Contestant';
-    document.querySelector(".turn-button").style.display = 'inline';
-    document.querySelector(".positive").style.display = 'inline';
-    document.querySelector(".negative").style.display = 'inline';
-    document.querySelector(".voice-font1").style.display = 'none';
+  
    
     
 
