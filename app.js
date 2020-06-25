@@ -115,9 +115,14 @@ class UI {
         }, 3000);
         }
 
-    
+    }
 
+    deleteContestant(target){
+        if (target.className === 'delete') {
+            // if the X a tag is select traverse up the DOM to get the table row and delete it
+            target.parentElement.parentElement.remove();
 
+        }
     }
 
 
@@ -368,4 +373,17 @@ const posReact = document.querySelector("#player2");
 posReact.play();
     
 }
+
+// Event delegation for delete button
+document.querySelector('#contestant-list').addEventListener('click', function(e){
+   
+    // Instantiate UI
+    const ui = new UI();
+
+    ui.deleteContestant(e.target);
+
+    
+    
+    e.preventDefault();
+});
 
