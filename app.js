@@ -51,6 +51,20 @@ class Store {
         return contestants;
     }
 
+    // Display contestants from local storage in the UI
+    // So when you refresh the page the contestants will remain visible
+    static displayContestants(){
+        // get contestants that are stored in local storage
+        const contestants = Store.getContestants();
+
+        //loop through the contestants in ls
+        contestants.forEach(contestant=>{
+            const ui = new UI;
+
+            ui.addContestantToList(contestant);
+        });
+    }
+
     // Add to local storage
     static addContestant(contestant) {
         const contestants = Store.getContestants();
@@ -61,6 +75,8 @@ class Store {
         localStorage.setItem('contestants', JSON.stringify(contestants));
     }
 }
+
+document.addEventListener('DOMContentLoaded', Store.displayContestants);
 
 class UI {
     // Add contestant to list function
@@ -171,7 +187,7 @@ contestantDataArray.push(contestant);
 Store.addContestant(contestant);
 
 
-ui.formAlert('Succesfully added a contestant!', 'alert-success');
+ui.formAlert('Successfully added a contestant!', 'alert-success');
 
 // Clear Form Fields
 ui.clearFields()
@@ -382,7 +398,7 @@ document.querySelector('#contestant-list').addEventListener('click', function(e)
 
     ui.deleteContestant(e.target);
 
-    
+
     
     e.preventDefault();
 });
