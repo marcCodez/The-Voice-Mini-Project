@@ -39,8 +39,8 @@
 				&#127908; Register Contestants to start the Auditions &#127908;
             </h1>
             <div class="container contList">
-            <table class="table table-light">
-                <thead>
+            <table class="table table-light listTable">
+                <thead class="tablehead">
                     <tr>
                         <th>Name</th>
                         <th>Age</th>
@@ -75,8 +75,8 @@
 				aria-labelledby="contestantModalLabel"
 				aria-hidden="true"
 			>
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
+				<div class="modal-dialog modalContainer" role="document">
+					<div class="modal-content modContentContainer">
 						<div class="modal-header">
 							<h5 class="modal-title text-danger" id="contestantModalLabel">
 								Register Contestant
@@ -90,7 +90,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body regoBody">
 							<form class="w-form regoForm">
 								<div class="form-group">
 									<label for="name">Name</label>
@@ -99,21 +99,21 @@
 
 								<div class="form-group">
 									<label for="age">Age</label>
-									<input type="text" id="contAge" class="form-control" />
+									<input type="number" id="contAge" class="form-control" />
 								</div>
 								<div class="form-group">
 									<label for="location">Location</label>
 									<input type="text" id="contLocation" class="form-control" />
 								</div>
 								<div class="form-group">
-									<label for="song">Song Name + Artist</label>
+									<label for="song">Song</label>
 									<input type="text" id="song" class="form-control" />
 								</div>
 								<div class="form-group">
 									<label for="link"
 										>Link (Valid Embedded Youtube Link with start time)</label
 									>
-									<input type="text" id="link" class="form-control" placeholder="https://www.youtube.com/embed/fZB-ptAnoQc?start=26"/>
+									<input type="text" id="link" class="form-control" placeholder="eg.https://www.youtube.com/embed/fZB-ptAnoQc?start=26" />
 								</div>
 							
 						</div>

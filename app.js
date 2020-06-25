@@ -63,6 +63,7 @@ class Store {
 }
 
 class UI {
+    // Add contestant to list function
     addContestantToList(contestant) {
         //get the eleement to append the row
         const list = document.querySelector('#contestant-list');
@@ -82,6 +83,45 @@ class UI {
     list.appendChild(row);
     }
 
+    formAlert(message, alertClassName){
+        // Construct the element
+        const alertBox = document.createElement('div');
+
+        // Add classes
+        alertBox.className = `alert ${alertClassName}`
+
+        // Add text
+        alertBox.appendChild(document.createTextNode(message));
+
+        // Get parent to position the message
+        const container = document.querySelector('.modContentContainer');
+        const form = document.querySelector('.regoBody');
+        const tableContainer = document.querySelector('.contList');
+        const table = document.querySelector('.listTable');
+
+     
+
+        if (alertClassName === 'alert-danger') {
+        // Insert alert - Inside container insert div before form
+        container.insertBefore(alertBox, form);
+        setTimeout(function(){
+            document.querySelector('.alert').remove();
+        }, 3000);
+        } else if (alertClassName === 'alert-success'){
+            // Insert alert - Inside container insert div before form
+        tableContainer.insertBefore(alertBox, table);
+        setTimeout(function(){
+            document.querySelector('.alert').remove();
+        }, 3000);
+        }
+
+    
+
+
+    }
+
+
+    // Clear form fields function
     clearFields(){
         document.querySelector("#contName").value = '';
         document.querySelector("#contAge").value = '';
@@ -112,20 +152,31 @@ const contestant = new Contestant(name, age, location, song, link);
 // Instantiate UI
 const ui = new UI()
 
-// Add contestant to list
+if (name === '' || age === '' || location === '' || song === '' || link === '') {
+ui.formAlert('Please fill in all fields', 'alert-danger');
+
+} else {
+
+  
+    // Add contestant to list
 ui.addContestantToList(contestant);
 
-// Clear Form Fields
-ui.clearFields();
+contestantDataArray.push(contestant);
 
 Store.addContestant(contestant);
 
-contestantDataArray.push(contestant);
+
+ui.formAlert('Succesfully added a contestant!', 'alert-success');
+
+// Clear Form Fields
+ui.clearFields()
+
 document.querySelector(".voice-font1").style.display = 'none';
 
  //close modal - need to use jQuery
  $('#contestantModal').modal('hide');
 
+}
 
     e.preventDefault();
     
@@ -196,7 +247,7 @@ function nextContestant() {
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-danger">No contestants!</h5>
+              <h5 class="modal-title text-danger">No contestants in queue</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
