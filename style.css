@@ -112,6 +112,11 @@ video {
 	top: 5rem;
 }
 
+.contList {
+	position: absolute;
+	margin-top: 8rem;
+}
+
 .judges-panel {
 	display: flex;
 	background-color: grey;

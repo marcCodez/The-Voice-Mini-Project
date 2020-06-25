@@ -62,6 +62,27 @@ class Store {
     }
 }
 
+class UI {
+    addContestantToList(contestant) {
+        //get the eleement to append the row
+        const list = document.querySelector('#contestant-list');
+
+        // create a row element
+        const row = document.createElement('tr');
+
+       // Insert columns inside row
+       row.innerHTML = `
+       <td>${contestant.name}</td>
+       <td>${contestant.age}</td>
+       <td>${contestant.location}</td>
+       <td>${contestant.song}</td>
+       <td><a href="#" class="delete">X<a></td>
+       `
+    //    append row to table body list
+    list.appendChild(row);
+    }
+}
+
 const contestantDataArray =[];
 
 
@@ -78,10 +99,16 @@ const name = document.querySelector("#contName").value,
 // Instantiate Contestant - create an instance
 const contestant = new Contestant(name, age, location, song, link);
 
+// Instantiate UI
+const ui = new UI()
+
+ui.addContestantToList(contestant);
+
 
 Store.addContestant(contestant);
 
 contestantDataArray.push(contestant);
+document.querySelector(".voice-font1").style.display = 'none';
 
  //close modal - need to use jQuery
  $('#contestantModal').modal('hide');
@@ -143,6 +170,7 @@ function nextContestant() {
     document.querySelector(".positive").style.display = 'inline';
     document.querySelector(".negative").style.display = 'inline';
     document.querySelector(".voice-font1").style.display = 'none';
+    document.querySelector(".contList").style.display = 'none';
   
     } else  {
 
@@ -173,7 +201,7 @@ function nextContestant() {
 
       setTimeout(function(){
         window.location.reload();
-    }, 3500);
+    }, 3000);
         // Erase Contestant list
        
       
