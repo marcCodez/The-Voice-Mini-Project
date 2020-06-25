@@ -81,6 +81,16 @@ class UI {
     //    append row to table body list
     list.appendChild(row);
     }
+
+    clearFields(){
+        document.querySelector("#contName").value = '';
+        document.querySelector("#contAge").value = '';
+        document.querySelector("#contLocation").value = '';
+        document.querySelector("#song").value = '';
+        document.querySelector("#link").value = '';
+        
+
+    }
 }
 
 const contestantDataArray =[];
@@ -102,8 +112,11 @@ const contestant = new Contestant(name, age, location, song, link);
 // Instantiate UI
 const ui = new UI()
 
+// Add contestant to list
 ui.addContestantToList(contestant);
 
+// Clear Form Fields
+ui.clearFields();
 
 Store.addContestant(contestant);
 
