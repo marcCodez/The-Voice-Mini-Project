@@ -138,7 +138,7 @@ class UI {
         const tableContainer = document.querySelector('.contList');
         const table = document.querySelector('.listTable');
 
-     
+   
 
         if (alertClassName === 'alert-danger') {
         // Insert alert - Inside container insert div before form
@@ -415,16 +415,18 @@ posReact.play();
     
 }
 
-// Event delegation for delete button
+// Event delegation for delete button - remove contestant ui from list
 document.querySelector('#contestant-list').addEventListener('click', function(e){
    
     // Instantiate UI
      const ui = new UI();
 
+     // Remove from UI
     ui.deleteContestant(e.target);
-    // finding name delete
-    
 
+    ui.formAlert('Contestant removed successfully', 'alert-success');
+    
+    // Remove contestant from local storage
     Store.removeContestant(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 
     
