@@ -74,6 +74,29 @@ class Store {
         // set local storage back to string with the new contestant
         localStorage.setItem('contestants', JSON.stringify(contestants));
     }
+
+    static removeContestant(contestantFromList){
+        let contestants;
+
+        // If no contestants in local storage set it to an empty array
+        if (localStorage.getItem('contestants') === null){
+            contestants =[];
+        } else {
+            // grab contestants from local storage and convert to JSON object
+            contestants = JSON.parse(localStorage.getItem('contestants'));
+        }
+
+        // Loop through each contestant, if contestant from list is equal to one from local storage delete it
+        contestants.forEach((contestant, index) =>{
+            if (contestantFromList === contestant.name){
+                contestants.splice(index, 1);
+                
+            }
+        });
+        // set back to a string
+        localStorage.setItem('contestants', JSON.stringify(contestants));
+
+    }
 }
 
 document.addEventListener('DOMContentLoaded', Store.displayContestants);
@@ -135,8 +158,10 @@ class UI {
 
     deleteContestant(target){
         if (target.className === 'delete') {
-            // if the X a tag is select traverse up the DOM to get the table row and delete it
+            // if the X a tag is select traverse up the DOM to get the table row and delete it from UI
             target.parentElement.parentElement.remove();
+            
+           
 
         }
     }
@@ -192,7 +217,6 @@ ui.formAlert('Successfully added a contestant!', 'alert-success');
 // Clear Form Fields
 ui.clearFields()
 
-document.querySelector(".voice-font1").style.display = 'none';
 
  //close modal - need to use jQuery
  $('#contestantModal').modal('hide');
@@ -294,7 +318,7 @@ function nextContestant() {
       
 
        
-        
+    localStorage.clear();
 
     }
 
@@ -394,10 +418,13 @@ posReact.play();
 document.querySelector('#contestant-list').addEventListener('click', function(e){
    
     // Instantiate UI
-    const ui = new UI();
+     const ui = new UI();
 
     ui.deleteContestant(e.target);
+    // finding name delete
+    
 
+    Store.removeContestant(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 
     
     e.preventDefault();

@@ -64,12 +64,9 @@ video {
 	font-family: voiceFont;
 	color: black;
 	position: absolute;
-	top: 50;
-}
-
-.voice-font1 {
-}
-.voice-font2 {
+	align-self: flex-start;
+	margin-top: 5rem;
+	/* top: 30; */
 }
 
 .turn-button {
@@ -114,7 +111,8 @@ video {
 
 .contList {
 	position: absolute;
-	margin-top: 5rem;
+	align-self: flex-start;
+	margin-top: 11rem;
 }
 
 .judges-panel {
