@@ -280,6 +280,7 @@ function nextContestant() {
     document.querySelector(".negative").style.display = 'inline';
     document.querySelector(".voice-font1").style.display = 'none';
     document.querySelector(".contList").style.display = 'none';
+    document.querySelector(".register").style.display = 'none';
   
     } else  {
 

@@ -82,6 +82,7 @@ video {
 	text-decoration: none;
 	align-self: center;
 	display: none;
+	margin-right: 5rem;
 }
 
 /* :active an element being activated by a user */
@@ -92,13 +93,10 @@ video {
 }
 
 .next {
-	background-color: black;
-	color: white;
-	margin-left: 10rem;
-	align-self: center;
-	font-size: 1.5rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	margin-right: 3rem;
 	cursor: pointer;
-	padding: 1.5rem;
 }
 
 .profile {
@@ -155,6 +153,8 @@ img {
 
 .register {
 	margin-left: 4rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 }
 
 .close {
