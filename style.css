@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
 }
 
 @font-face {
@@ -7,44 +8,57 @@
 	src: url(The-Voice-Font.ttf.woff);
 }
 
-.stage {
-	/* width: 100%;
+/* .stage { */
+/* width: 100%;
 	height: 100%; */
-	position: relative;
+/* position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 100vh; */
 
-	/* width: 100%; */
-	overflow: hidden;
-	/* position: absolute;
+/* width: 100%; */
+/* overflow: hidden; */
+/* position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%); */
-	/* z-index: -1; */
-}
+/* z-index: -1; */
+/* } */
 
-.stageContainer {
+/* .stageContainer {
 	max-width: 100%;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	margin: auto;
 	text-align: center;
-}
+} */
 
 .video-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
+	position: relative;
+	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-content: flex-start;
 }
 
-video {
-	min-width: 100vw;
-	min-height: 100vh;
+.video-container video {
+	z-index: -1;
+	position: absolute;
+	/* setting w/h to auto will keep the video aspect ratio inline with aspect ratio of the vid file */
+	width: auto;
+	height: auto;
+	/* to take up all the available w/h of the container and keep its aspect ratio */
+	min-width: 100%;
+	min-height: 100%;
+	/* since we can only see the top left corner of the video we need to center the origin of the video in the middle of the screen */
+	top: 50%;
+	left: 50%;
+	/* reposition the video with translate to get the center of the video */
+	transform: translate(-50%, -50%);
 	/* min-width: 100%; */
 	/* position: absolute;
 	top: 50%;
@@ -53,19 +67,12 @@ video {
 	/* z-index: -1; */
 }
 
-.headings-div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .voice-font1,
 .voice-font2 {
 	font-family: voiceFont;
 	color: black;
-	position: absolute;
-	align-self: flex-start;
-	margin-top: 5rem;
+	margin-top: 3rem;
+	padding: 1rem;
 	/* top: 30; */
 }
 
@@ -95,7 +102,6 @@ video {
 .next {
 	margin-top: 2rem;
 	margin-bottom: 2rem;
-	margin-right: 3rem;
 	cursor: pointer;
 }
 
@@ -107,11 +113,10 @@ video {
 	top: 5rem;
 }
 
-.contList {
-	position: absolute;
+/* .contList {
 	align-self: flex-start;
 	margin-top: 11rem;
-}
+} */
 
 .judges-panel {
 	display: flex;
@@ -137,7 +142,7 @@ img {
 
 .positive {
 	display: none;
-	margin-left: 7rem;
+	margin-left: 6rem;
 	height: 4rem;
 }
 
