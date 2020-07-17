@@ -26,6 +26,8 @@
 	
 // ];
 
+
+
 class Contestant {
     constructor(name, age, location, song, link){
         this.name = name;
@@ -419,12 +421,16 @@ document.querySelector('#contestant-list').addEventListener('click', function(e)
     Store.removeContestant(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 
     }
-
-
-     
-
     
     e.preventDefault();
 });
 
 
+
+window.onresize = function() {
+    var table = document.querySelector('.test');
+  if (window.innerWidth > 560){
+       table.classList.add('table-sm')}
+  else{ table.classList.remove('table-sm')
+  };
+};

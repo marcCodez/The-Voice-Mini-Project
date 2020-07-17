@@ -121,9 +121,8 @@ body {
 }
 
 /* .contList {
-	align-self: flex-start;
-	margin-top: 11rem;
-} */
+	/* overflow-x: scroll; */
+/* height: 300px; */
 
 .judges-panel {
 	display: flex;
@@ -193,6 +192,10 @@ do the same when screen is below 16/9 */
 
 /* Any devices with width 767px and below */
 @media (max-width: 767px) {
+	.voice-font1 {
+		font-size: 1.5rem;
+		margin-top: 0;
+	}
 	/* Replace the footage with a static image, due to high data cost on mobile */
 	#videoBG {
 		display: none;
@@ -202,5 +205,19 @@ do the same when screen is below 16/9 */
 		background: url("media/poster.png");
 		background-size: cover;
 		background-position: center;
+	}
+}
+
+@media (max-height: 680px) {
+	.contList {
+		overflow-x: scroll;
+		height: 250px;
+	}
+}
+
+@media (max-height: 320px) {
+	.contList {
+		overflow-x: scroll;
+		height: 200px;
 	}
 }
