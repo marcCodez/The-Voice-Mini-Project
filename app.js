@@ -108,7 +108,8 @@ class UI {
         const list = document.querySelector('#contestant-list');
 
         // create a row element
-        const row = document.createElement('tr');
+        const row = document.createElement('tr'); 
+        row.className = 'delete-item';
 
        // Insert columns inside row
        row.innerHTML = `
@@ -421,6 +422,7 @@ document.querySelector('#contestant-list').addEventListener('click', function(e)
     // Instantiate UI
      const ui = new UI();
 
+    
      // Remove from UI
     ui.deleteContestant(e.target);
 
