@@ -109,7 +109,6 @@ class UI {
 
         // create a row element
         const row = document.createElement('tr'); 
-        row.className = 'delete-item';
 
        // Insert columns inside row
        row.innerHTML = `
@@ -155,16 +154,6 @@ class UI {
         }, 3000);
         }
 
-    }
-
-    deleteContestant(target){
-        if (target.className === 'delete') {
-            // if the X a tag is select traverse up the DOM to get the table row and delete it from UI
-            target.parentElement.parentElement.remove();
-            
-           
-
-        }
     }
 
 
@@ -419,19 +408,23 @@ posReact.play();
 // Event delegation for delete button - remove contestant ui from list
 document.querySelector('#contestant-list').addEventListener('click', function(e){
    
-    // Instantiate UI
-     const ui = new UI();
 
-    
-     // Remove from UI
-    ui.deleteContestant(e.target);
+    const ui = new UI();
 
-    ui.formAlert('Contestant removed successfully', 'alert-success');
-    
-    // Remove contestant from local storage
+    if (e.target.className === 'delete') {
+        // if the X a tag is select traverse up the DOM to get the table row and delete it from UI
+        e.target.parentElement.parentElement.remove();
+        ui.formAlert('Contestant removed successfully', 'alert-success');
+           // Remove contestant from local storage
     Store.removeContestant(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+
+    }
+
+
+     
 
     
     e.preventDefault();
 });
+
 
