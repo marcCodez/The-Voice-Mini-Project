@@ -220,17 +220,83 @@ ui.clearFields()
 });
 
 
+class SoundEffects {
+
+    constructor(){
+        this.events()
+
+    }
+
+    events() {
+        document.querySelector('.turn-button').addEventListener('click', this.buttonSound());
+
+document.querySelector('.negative').addEventListener('click', this.negativeReact());
+
+document.querySelector('.positive').addEventListener('click', this.positiveReact());
+
+    }
+
+    // methods
+
+buttonSound(){
+ 
+    const sound = document.querySelector('#audio');
+    sound.play();
+    document.querySelector(".anon").style.display = 'none'
+    document.querySelector("iframe").style.display='block';
+    document.querySelector("#name").style.display='inline';
+    document.querySelector("#age").style.display=`inline`;
+    document.querySelector("#location").style.display=`inline`;
+    // document.querySelector('#imageDisplay').innerHTML = `<img
+    // src="${currentContestant.image}">`;
+}
+
+
+negativeReact(){
+     //An array to house all of the URLs of your sounds
+     var sounds = [ "audio/boring.mp3",
+     "audio/what.mp3",
+    "audio/garbage.mp3",
+"audio/no.mp3",
+"audio/stop.mp3"];
+
+//This line will select a random sound to play out of your provided URLS
+var soundFile = sounds[Math.floor(Math.random()*sounds.length)];
+
+//Find the player element that you created and generate an embed file to play the sound within it
+document.querySelector("#player").src= soundFile ;
+const negReact = document.querySelector("#player");
+negReact.play();
+
+
+}
+
+positiveReact(){
+    //An array to house all of the URLs of your sounds
+    const sounds = [ "audio/clap.mp3",
+"audio/unbev.mp3",
+"audio/greatness.mp3",
+"audio/fav.mp3",
+"audio/winner.mp3",
+"audio/genius.mp3"
+];
+
+//This line will select a random sound to play out of your provided URLS
+const soundFile = sounds[Math.floor(Math.random()*sounds.length)];
+
+//Find the player element that you created and generate an embed file to play the sound within it
+document.querySelector("#player2").src=soundFile;
+const posReact = document.querySelector("#player2");
+posReact.play();
+    
+}
+
+}
 
 
 
-document.querySelector('.turn-button').addEventListener('click', buttonSound);
 
-// Create event for next button
-document.querySelector('.next').addEventListener('click', nextContestant);
 
-document.querySelector('.negative').addEventListener('click', negativeReact);
-
-document.querySelector('.positive').addEventListener('click', positiveReact);
 
 // document.querySelector('.start').addEventListener('click', ;
 
@@ -241,7 +307,8 @@ let contestants = profileIterator(contestantDataArray);
 // Call first profile
 
 
-
+// Create event for next button
+document.querySelector('.next').addEventListener('click', nextContestant);
 
 
 // Next profile Display
@@ -354,58 +421,6 @@ return {
 }
 
 
-function buttonSound(){
- 
-    const sound = document.querySelector('#audio');
-    sound.play();
-    document.querySelector(".anon").style.display = 'none'
-    document.querySelector("iframe").style.display='block';
-    document.querySelector("#name").style.display='inline';
-    document.querySelector("#age").style.display=`inline`;
-    document.querySelector("#location").style.display=`inline`;
-    // document.querySelector('#imageDisplay').innerHTML = `<img
-    // src="${currentContestant.image}">`;
-}
-
-
-function negativeReact(){
-     //An array to house all of the URLs of your sounds
-     var sounds = [ "audio/boring.mp3",
-     "audio/what.mp3",
-    "audio/garbage.mp3",
-"audio/no.mp3",
-"audio/stop.mp3"];
-
-//This line will select a random sound to play out of your provided URLS
-var soundFile = sounds[Math.floor(Math.random()*sounds.length)];
-
-//Find the player element that you created and generate an embed file to play the sound within it
-document.querySelector("#player").src= soundFile ;
-const negReact = document.querySelector("#player");
-negReact.play();
-
-
-}
-
-function positiveReact(){
-    //An array to house all of the URLs of your sounds
-    const sounds = [ "audio/clap.mp3",
-"audio/unbev.mp3",
-"audio/greatness.mp3",
-"audio/fav.mp3",
-"audio/winner.mp3",
-"audio/genius.mp3"
-];
-
-//This line will select a random sound to play out of your provided URLS
-const soundFile = sounds[Math.floor(Math.random()*sounds.length)];
-
-//Find the player element that you created and generate an embed file to play the sound within it
-document.querySelector("#player2").src=soundFile;
-const posReact = document.querySelector("#player2");
-posReact.play();
-    
-}
 
 // Event delegation for delete button - remove contestant ui from list
 document.querySelector('#contestant-list').addEventListener('click', function(e){
@@ -429,7 +444,7 @@ document.querySelector('#contestant-list').addEventListener('click', function(e)
 
 window.onresize = function() {
     var table = document.querySelector('.test');
-  if (window.innerWidth > 560){
+  if (window.innerWidth < 767){
        table.classList.add('table-sm')}
   else{ table.classList.remove('table-sm')
   };

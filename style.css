@@ -172,6 +172,10 @@ img {
 	display: none;
 }
 
+.delete {
+	color: red;
+}
+
 /* widescreen aspect ratio with a width of 16 units and height of 9. Has become the most common aspect ratio for televisions and computer monitors  */
 /* When the screen is too wide */
 @media (min-aspect-ratio: 16/9) {
@@ -192,6 +196,7 @@ do the same when screen is below 16/9 */
 
 /* Any devices with width 767px and below */
 @media (max-width: 767px) {
+	/* move heading to the top and reduce font size */
 	.voice-font1 {
 		font-size: 1.5rem;
 		margin-top: 0;
@@ -208,6 +213,7 @@ do the same when screen is below 16/9 */
 	}
 }
 
+/* For Iphone 6/7 devices reduce table height and scroll */
 @media (max-height: 680px) {
 	.contList {
 		overflow-x: scroll;
@@ -215,6 +221,7 @@ do the same when screen is below 16/9 */
 	}
 }
 
+/* For iphone 5/5s reduce height and scroll */
 @media (max-height: 320px) {
 	.contList {
 		overflow-x: scroll;
