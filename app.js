@@ -220,7 +220,10 @@ ui.clearFields()
 });
 
 
+
 class SoundEffects {
+
+
 
     constructor(){
         this.events()
@@ -228,11 +231,11 @@ class SoundEffects {
     }
 
     events() {
-        document.querySelector('.turn-button').addEventListener('click', this.buttonSound());
+        document.querySelector('.turn-button').addEventListener('click', () => this.buttonSound());
 
-document.querySelector('.negative').addEventListener('click', this.negativeReact());
+document.querySelector('.negative').addEventListener('click', () => this.negativeReact());
 
-document.querySelector('.positive').addEventListener('click', this.positiveReact());
+document.querySelector('.positive').addEventListener('click', () => this.positiveReact());
 
     }
 
@@ -293,6 +296,7 @@ posReact.play();
 
 }
 
+const soundFX = new SoundEffects();
 
 
 
