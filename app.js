@@ -1,34 +1,3 @@
-// Temporary hardcoded data
-// const data = [
-// 	{
-// 		name: 'Dua Lipa',
-// 		age: 22,
-// 		location: 'UK',
-//         song: 'Arctic Monkeys - Do I Wanna Know?',
-//         link:'https://www.youtube.com/embed/fZB-ptAnoQc?start=26'
-// 	},
-// 	{
-// 		name: 'James Arthur',
-// 		age: 24,
-// 		location: 'UK',
-//         song: 'Frankie Vallie - Cant Take my Eyes Off you',
-//         link:'https://www.youtube.com/embed/JUeEcdS-aa0?start=12'
-       
-//     },
-//     {
-// 		name: 'Francisco Martin',
-// 		age: 22,
-// 		location: 'America',
-//         song: 'Harry Styles - Falling',
-//         link:'https://www.youtube.com/embed/b4IDCCJDCTg?start=2'
-       
-// 	},
-	
-// ];
-
-
-
-
 
 class Contestant {
     constructor(name, age, location, song, link){
@@ -40,6 +9,77 @@ class Contestant {
     }
 
 }
+
+
+
+class Store {
+
+    //events 
+    
+
+    // Fetch from local storage
+    static getContestants() {
+        let contestants;
+        if(localStorage.getItem('contestants') === null){
+            contestants = [];
+        } else {
+            // convert to JS object to push item
+            contestants = JSON.parse(localStorage.getItem('contestants'))
+        }
+        return contestants;
+    }
+
+    // Display contestants from local storage in the UI
+    // So when you refresh the page the contestants will remain visible
+    static displayContestants(){
+        // get contestants that are stored in local storage
+        const contestants = Store.getContestants();
+
+        //loop through the contestants in ls
+        contestants.forEach(contestant=>{
+            const ui = new UI;
+
+            ui.addContestantToList(contestant);
+        });
+    }
+
+    // Add to local storage
+    static addContestant(contestant) {
+        const contestants = Store.getContestants();
+
+        // push it in the converted JS object
+        contestants.push(contestant);
+        // set local storage back to string with the new contestant
+        localStorage.setItem('contestants', JSON.stringify(contestants));
+    }
+
+    static removeContestant(contestantFromList){
+        let contestants;
+
+        // If no contestants in local storage set it to an empty array
+        if (localStorage.getItem('contestants') === null){
+            contestants =[];
+        } else {
+            // grab contestants from local storage and convert to JSON object
+            contestants = JSON.parse(localStorage.getItem('contestants'));
+        }
+
+        // Loop through each contestant, if contestant from list is equal to one from local storage delete it
+        contestants.forEach((contestant, index) =>{
+            if (contestantFromList === contestant.name){
+                contestants.splice(index, 1);
+                
+            }
+        });
+        // set back to a string
+        localStorage.setItem('contestants', JSON.stringify(contestants));
+
+    }
+}
+
+document.addEventListener('DOMContentLoaded', Store.displayContestants);
+
+
 
 class ManageContestant{
   
@@ -56,50 +96,7 @@ class ManageContestant{
 events() {
     // Create event for next button
 document.querySelector('.next').addEventListener('click', () => this.nextContestant());
-
-document.querySelector(".regoForm").addEventListener('submit', 
-function(e){
-    // Get values from contestant rego form
-const name = document.querySelector("#contName").value,
- age = document.querySelector("#contAge").value,
- location = document.querySelector("#contLocation").value,
- song = document.querySelector("#song").value,
- link = document.querySelector("#link").value;
-
-// Instantiate Contestant - create an instance
-const contestant = new Contestant(name, age, location, song, link);
-
-// Instantiate UI
-const ui = new UI()
-
-if (name === '' || age === '' || location === '' || song === '' || link === '') {
-ui.formAlert('Please fill in all fields', 'alert-danger');
-
-} else {
-
-  
-    // Add contestant to list
-ui.addContestantToList(contestant);
-
-this.contestantDataArray.push(contestant);
-
-Store.addContestant(contestant);
-
-
-ui.formAlert('Successfully added a contestant!', 'alert-success');
-
-// Clear Form Fields
-ui.clearFields()
-
-
- //close modal - need to use jQuery
- $('#contestantModal').modal('hide');
-
-}
-
-    e.preventDefault();
-    
-});
+document.querySelector(".regoForm").addEventListener('submit', () => this.submitForm(this.contestantDataArray))
 }
 
 
@@ -108,7 +105,7 @@ ui.clearFields()
 
 // Next profile Display
 nextContestant() {
-    const currentContestant = contestants.next().value;
+    const currentContestant = this.contestants.next().value;
 
  
     // Add a condition if it finishes looping through the array
@@ -181,7 +178,8 @@ nextContestant() {
 
 
 // Profile Iterator
-profileIterator(contestants) {
+profileIterator() {
+    let contestants = this.contestantDataArray;
     // counter
 let nextIndex = 0;
 // let finalIndex = contestants.length-1;
@@ -214,78 +212,69 @@ return {
 
 
 
+submitForm(){
+
+
+   let array = this.contestantDataArray;
+    // Get values from contestant rego form
+const name = document.querySelector("#contName").value,
+ age = document.querySelector("#contAge").value,
+ location = document.querySelector("#contLocation").value,
+ song = document.querySelector("#song").value,
+ link = document.querySelector("#link").value;
+
+// Instantiate Contestant - create an instance
+const contestant = new Contestant(name, age, location, song, link);
+
+// Instantiate UI
+const ui = new UI()
+
+if (name === '' || age === '' || location === '' || song === '' || link === '') {
+ui.formAlert('Please fill in all fields', 'alert-danger');
+
+} else {
+
+  
+    // Add contestant to list
+ui.addContestantToList(contestant);
+
+array.push(contestant);
+
+console.log(array)
+
+
+
+Store.addContestant(contestant);
+
+
+ui.formAlert('Successfully added a contestant!', 'alert-success');
+
+// Clear Form Fields
+ui.clearFields()
+
+
+ //close modal - need to use jQuery
+ $('#contestantModal').modal('hide');
+
+}
+
+// e.preventDefault();
+    
+};
+
 
 }
 
 let manageContestant = new ManageContestant();
 
 
-class Store {
 
-    //events 
-    
 
-    // Fetch from local storage
-    static getContestants() {
-        let contestants;
-        if(localStorage.getItem('contestants') === null){
-            contestants = [];
-        } else {
-            // convert to JS object to push item
-            contestants = JSON.parse(localStorage.getItem('contestants'))
-        }
-        return contestants;
-    }
 
-    // Display contestants from local storage in the UI
-    // So when you refresh the page the contestants will remain visible
-    static displayContestants(){
-        // get contestants that are stored in local storage
-        const contestants = Store.getContestants();
 
-        //loop through the contestants in ls
-        contestants.forEach(contestant=>{
-            const ui = new UI;
 
-            ui.addContestantToList(contestant);
-        });
-    }
 
-    // Add to local storage
-    static addContestant(contestant) {
-        const contestants = Store.getContestants();
 
-        // push it in the converted JS object
-        contestants.push(contestant);
-        // set local storage back to string with the new contestant
-        localStorage.setItem('contestants', JSON.stringify(contestants));
-    }
-
-    static removeContestant(contestantFromList){
-        let contestants;
-
-        // If no contestants in local storage set it to an empty array
-        if (localStorage.getItem('contestants') === null){
-            contestants =[];
-        } else {
-            // grab contestants from local storage and convert to JSON object
-            contestants = JSON.parse(localStorage.getItem('contestants'));
-        }
-
-        // Loop through each contestant, if contestant from list is equal to one from local storage delete it
-        contestants.forEach((contestant, index) =>{
-            if (contestantFromList === contestant.name){
-                contestants.splice(index, 1);
-                
-            }
-        });
-        // set back to a string
-        localStorage.setItem('contestants', JSON.stringify(contestants));
-
-    }
-}
-
-document.addEventListener('DOMContentLoaded', Store.displayContestants);
 
 class UI {
     // Add contestant to list function
@@ -354,7 +343,6 @@ class UI {
 
     }
 }
-
 
 
 
@@ -441,9 +429,6 @@ const soundFX = new SoundEffects();
 
 
 // Call first profile
-
-
-
 
 
 
