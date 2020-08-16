@@ -86,7 +86,7 @@ class ManageContestant{
     constructor(){
          // pass the data in the profileIterator function
          this.contestantDataArray = [];
-         this.contestants = this.profileIterator(this.contestantDataArray);
+         this.contestants = this.profileIterator();
         this.events();
     }
 
@@ -95,12 +95,66 @@ class ManageContestant{
 //Events
 events() {
     // Create event for next button
+    document.querySelector(".regoForm").addEventListener('submit', () => this.submitForm())
 document.querySelector('.next').addEventListener('click', () => this.nextContestant());
-document.querySelector(".regoForm").addEventListener('submit', () => this.submitForm(this.contestantDataArray))
 }
 
 
 //Methods
+
+submitForm(){
+
+
+  
+     // Get values from contestant rego form
+ const name = document.querySelector("#contName").value,
+  age = document.querySelector("#contAge").value,
+  location = document.querySelector("#contLocation").value,
+  song = document.querySelector("#song").value,
+  link = document.querySelector("#link").value;
+ 
+ // Instantiate Contestant - create an instance
+ const contestant = new Contestant(name, age, location, song, link);
+ 
+ // Instantiate UI
+ const ui = new UI()
+ 
+ if (name === '' || age === '' || location === '' || song === '' || link === '') {
+ ui.formAlert('Please fill in all fields', 'alert-danger');
+ 
+ } else {
+ 
+    const array = [];
+   
+     // Add contestant to list
+ ui.addContestantToList(this.contestant);
+ console.log(contestant);
+ 
+ array.push(contestant);
+ 
+ 
+ console.log(array)
+ 
+ 
+ Store.addContestant(contestant);
+ 
+
+ 
+ 
+ ui.formAlert('Successfully added a contestant!', 'alert-success');
+ 
+ // Clear Form Fields
+ ui.clearFields()
+ 
+ 
+  //close modal - need to use jQuery
+  $('#contestantModal').modal('hide');
+ 
+ }
+ 
+ // e.preventDefault();
+     
+ };
 
 
 // Next profile Display
@@ -210,57 +264,6 @@ return {
 
 }
 
-
-
-submitForm(){
-
-
-   let array = this.contestantDataArray;
-    // Get values from contestant rego form
-const name = document.querySelector("#contName").value,
- age = document.querySelector("#contAge").value,
- location = document.querySelector("#contLocation").value,
- song = document.querySelector("#song").value,
- link = document.querySelector("#link").value;
-
-// Instantiate Contestant - create an instance
-const contestant = new Contestant(name, age, location, song, link);
-
-// Instantiate UI
-const ui = new UI()
-
-if (name === '' || age === '' || location === '' || song === '' || link === '') {
-ui.formAlert('Please fill in all fields', 'alert-danger');
-
-} else {
-
-  
-    // Add contestant to list
-ui.addContestantToList(contestant);
-
-array.push(contestant);
-
-console.log(array)
-
-
-
-Store.addContestant(contestant);
-
-
-ui.formAlert('Successfully added a contestant!', 'alert-success');
-
-// Clear Form Fields
-ui.clearFields()
-
-
- //close modal - need to use jQuery
- $('#contestantModal').modal('hide');
-
-}
-
-// e.preventDefault();
-    
-};
 
 
 }
