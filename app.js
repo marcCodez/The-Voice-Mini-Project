@@ -1,32 +1,3 @@
-// Temporary hardcoded data
-// const data = [
-// 	{
-// 		name: 'Dua Lipa',
-// 		age: 22,
-// 		location: 'UK',
-//         song: 'Arctic Monkeys - Do I Wanna Know?',
-//         link:'https://www.youtube.com/embed/fZB-ptAnoQc?start=26'
-// 	},
-// 	{
-// 		name: 'James Arthur',
-// 		age: 24,
-// 		location: 'UK',
-//         song: 'Frankie Vallie - Cant Take my Eyes Off you',
-//         link:'https://www.youtube.com/embed/JUeEcdS-aa0?start=12'
-       
-//     },
-//     {
-// 		name: 'Francisco Martin',
-// 		age: 22,
-// 		location: 'America',
-//         song: 'Harry Styles - Falling',
-//         link:'https://www.youtube.com/embed/b4IDCCJDCTg?start=2'
-       
-// 	},
-	
-// ];
-
-
 
 class Contestant {
     constructor(name, age, location, song, link){
@@ -35,12 +6,17 @@ class Contestant {
         this.location = location;
         this.song = song;
         this.link = link;
-
     }
+
 }
 
 
+
 class Store {
+
+    //events 
+    
+
     // Fetch from local storage
     static getContestants() {
         let contestants;
@@ -102,6 +78,206 @@ class Store {
 }
 
 document.addEventListener('DOMContentLoaded', Store.displayContestants);
+
+
+
+class ManageContestant{
+  
+    constructor(){
+         // pass the data in the profileIterator function
+         this.contestantDataArray = [];
+         this.contestants = this.profileIterator();
+        this.events();
+    }
+
+
+
+//Events
+events() {
+    // Create event for next button
+    document.querySelector(".regoForm").addEventListener('submit', () => this.submitForm())
+document.querySelector('.next').addEventListener('click', () => this.nextContestant());
+}
+
+
+//Methods
+
+submitForm(){
+
+
+  
+     // Get values from contestant rego form
+ const name = document.querySelector("#contName").value,
+  age = document.querySelector("#contAge").value,
+  location = document.querySelector("#contLocation").value,
+  song = document.querySelector("#song").value,
+  link = document.querySelector("#link").value;
+ 
+ // Instantiate Contestant - create an instance
+ const contestant = new Contestant(name, age, location, song, link);
+ 
+ // Instantiate UI
+ const ui = new UI()
+ 
+ if (name === '' || age === '' || location === '' || song === '' || link === '') {
+ ui.formAlert('Please fill in all fields', 'alert-danger');
+ 
+ } else {
+ 
+    const array = [];
+   
+     // Add contestant to list
+ ui.addContestantToList(this.contestant);
+ console.log(contestant);
+ 
+ array.push(contestant);
+ 
+ 
+ console.log(array)
+ 
+ 
+ Store.addContestant(contestant);
+ 
+
+ 
+ 
+ ui.formAlert('Successfully added a contestant!', 'alert-success');
+ 
+ // Clear Form Fields
+ ui.clearFields()
+ 
+ 
+  //close modal - need to use jQuery
+  $('#contestantModal').modal('hide');
+ 
+ }
+ 
+ // e.preventDefault();
+     
+ };
+
+
+// Next profile Display
+nextContestant() {
+    const currentContestant = this.contestants.next().value;
+
+ 
+    // Add a condition if it finishes looping through the array
+    if(currentContestant !== undefined){
+    document.querySelector('#profileDisplay').innerHTML = `
+    <iframe class="mb-3 hidden-vid" width="539" height="315" src="${currentContestant.link}&rel=0&autoplay=1&mute=2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="imageDisplay"><img class="anon mb-3"
+                            src="media/anon.png"></div>
+    <ul class="list-group">
+        <li class="list-group-item" id="name">Name: ${currentContestant.name}
+        </li>
+        <li class ="list-group-item" id="age">Age: ${currentContestant.age}
+        </li>
+        <li class ="list-group-item" id="location">Location: ${currentContestant.location}
+        </li>
+        <li class ="list-group-item">Song: ${currentContestant.song} 
+        </li>
+    </ul>
+    `;
+    document.querySelector('.next').innerHTML = 'Next Contestant';
+    document.querySelector(".turn-button").style.display = 'inline';
+    document.querySelector(".positive").style.display = 'inline';
+    document.querySelector(".negative").style.display = 'inline';
+    document.querySelector(".voice-font1").style.display = 'none';
+    document.querySelector(".contList").style.display = 'none';
+    document.querySelector(".register").style.display = 'none';
+  
+    } else  {
+
+        // // set time out prob
+        // window.location.reload();
+
+        // No contestants popup
+        document.querySelector('#popupModal').innerHTML =   `
+       
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">No contestants in queue</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Please register your contestants</p>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      `;
+
+      document.querySelector('.popupButton').click();
+
+      setTimeout(function(){
+        window.location.reload();
+    }, 3000);
+        // Erase Contestant list
+       
+      
+        // No more contestants
+    localStorage.clear();
+
+    }
+
+    // document.querySelector('#imageDisplay').innerHTML = `<img
+    // src="${currentContestant.image}">`;
+}
+
+
+
+// Profile Iterator
+profileIterator() {
+    let contestants = this.contestantDataArray;
+    // counter
+let nextIndex = 0;
+// let finalIndex = contestants.length-1;
+
+
+// return object with next function
+return {
+    next: function(){
+        
+
+        return nextIndex < contestants.length ?
+        {value: contestants[nextIndex++], done: false} :
+        {done: true}
+      
+
+    //     next: function(){
+    //         if (contestants === contestants[contestants.length-1]){
+    //             return nextIndex < contestants.length ?
+    //             {value: contestants[0++], done: false} :
+    //             {done: true}
+    //         } else {
+    //         return nextIndex < contestants.length ?
+    //         {value: contestants[nextIndex++], done: false} :
+    //         {done: true}
+    //         }
+     } 
+};
+
+}
+
+
+
+}
+
+let manageContestant = new ManageContestant();
+
+
+
+
+
+
+
+
+
 
 class UI {
     // Add contestant to list function
@@ -171,60 +347,14 @@ class UI {
     }
 }
 
-const contestantDataArray =[];
 
 
 
-document.querySelector(".regoForm").addEventListener('submit', 
-function(e){
-    // Get values from contestant rego form
-const name = document.querySelector("#contName").value,
- age = document.querySelector("#contAge").value,
- location = document.querySelector("#contLocation").value,
- song = document.querySelector("#song").value,
- link = document.querySelector("#link").value;
 
-// Instantiate Contestant - create an instance
-const contestant = new Contestant(name, age, location, song, link);
-
-// Instantiate UI
-const ui = new UI()
-
-if (name === '' || age === '' || location === '' || song === '' || link === '') {
-ui.formAlert('Please fill in all fields', 'alert-danger');
-
-} else {
-
-  
-    // Add contestant to list
-ui.addContestantToList(contestant);
-
-contestantDataArray.push(contestant);
-
-Store.addContestant(contestant);
-
-
-ui.formAlert('Successfully added a contestant!', 'alert-success');
-
-// Clear Form Fields
-ui.clearFields()
-
-
- //close modal - need to use jQuery
- $('#contestantModal').modal('hide');
-
-}
-
-    e.preventDefault();
-    
-});
 
 
 
 class SoundEffects {
-
-
-
     constructor(){
         this.events()
 
@@ -240,7 +370,6 @@ document.querySelector('.positive').addEventListener('click', () => this.positiv
     }
 
     // methods
-
 buttonSound(){
  
     const sound = document.querySelector('#audio');
@@ -296,140 +425,19 @@ posReact.play();
 
 }
 
+//Instantiate a new Class object
 const soundFX = new SoundEffects();
 
 
 
 
-
-// document.querySelector('.start').addEventListener('click', ;
-
-
-// pass the data in the profileIterator function
-let contestants = profileIterator(contestantDataArray);
-
 // Call first profile
 
-
-// Create event for next button
-document.querySelector('.next').addEventListener('click', nextContestant);
-
-
-// Next profile Display
-function nextContestant() {
-    const currentContestant = contestants.next().value;
-
- 
-    // Add a condition if it finishes looping through the array
-    if(currentContestant !== undefined){
-    document.querySelector('#profileDisplay').innerHTML = `
-    <iframe class="mb-3 hidden-vid" width="539" height="315" src="${currentContestant.link}&rel=0&autoplay=1&mute=2" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <div id="imageDisplay"><img class="anon mb-3"
-                            src="media/anon.png"></div>
-    <ul class="list-group">
-        <li class="list-group-item" id="name">Name: ${currentContestant.name}
-        </li>
-        <li class ="list-group-item" id="age">Age: ${currentContestant.age}
-        </li>
-        <li class ="list-group-item" id="location">Location: ${currentContestant.location}
-        </li>
-        <li class ="list-group-item">Song: ${currentContestant.song} 
-        </li>
-    </ul>
-    `;
-    document.querySelector('.next').innerHTML = 'Next Contestant';
-    document.querySelector(".turn-button").style.display = 'inline';
-    document.querySelector(".positive").style.display = 'inline';
-    document.querySelector(".negative").style.display = 'inline';
-    document.querySelector(".voice-font1").style.display = 'none';
-    document.querySelector(".contList").style.display = 'none';
-    document.querySelector(".register").style.display = 'none';
-  
-    } else  {
-
-        // // set time out prob
-        // window.location.reload();
-
-        // No contestants popup
-        document.querySelector('#popupModal').innerHTML =   `
-       
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-danger">No contestants in queue</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Please register your contestants</p>
-            </div>
-           
-          </div>
-        </div>
-      </div>
-      `;
-
-      document.querySelector('.popupButton').click();
-
-      setTimeout(function(){
-        window.location.reload();
-    }, 3000);
-        // Erase Contestant list
-       
-      
-        // No more contestants
-      
-
-       
-    localStorage.clear();
-
-    }
-
-    // document.querySelector('#imageDisplay').innerHTML = `<img
-    // src="${currentContestant.image}">`;
-}
-
-
-
-// Profile Iterator
-function profileIterator(contestants) {
-    // counter
-let nextIndex = 0;
-// let finalIndex = contestants.length-1;
-
-
-// return object with next function
-return {
-    next: function(){
-        
-
-        return nextIndex < contestants.length ?
-        {value: contestants[nextIndex++], done: false} :
-        {done: true}
-      
-
-    //     next: function(){
-    //         if (contestants === contestants[contestants.length-1]){
-    //             return nextIndex < contestants.length ?
-    //             {value: contestants[0++], done: false} :
-    //             {done: true}
-    //         } else {
-    //         return nextIndex < contestants.length ?
-    //         {value: contestants[nextIndex++], done: false} :
-    //         {done: true}
-    //         }
-     } 
-};
-
-}
 
 
 
 // Event delegation for delete button - remove contestant ui from list
 document.querySelector('#contestant-list').addEventListener('click', function(e){
-   
-
     const ui = new UI();
 
     if (e.target.className === 'delete') {
